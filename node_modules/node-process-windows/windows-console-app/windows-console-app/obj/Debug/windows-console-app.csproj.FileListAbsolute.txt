@@ -1,0 +1,9 @@
+C:\BitBucket\bryanphe-workspace\projects\node-process-windows\windows-console-app\windows-console-app\bin\Debug\windows-console-app.exe.config
+C:\BitBucket\bryanphe-workspace\projects\node-process-windows\windows-console-app\windows-console-app\bin\Debug\windows-console-app.exe
+C:\BitBucket\bryanphe-workspace\projects\node-process-windows\windows-console-app\windows-console-app\bin\Debug\windows-console-app.pdb
+C:\BitBucket\bryanphe-workspace\projects\node-process-windows\windows-console-app\windows-console-app\obj\Debug\windows-console-app.csprojResolveAssemblyReference.cache
+C:\BitBucket\bryanphe-workspace\projects\node-process-windows\windows-console-app\windows-console-app\obj\Debug\windows-console-app.exe
+C:\BitBucket\bryanphe-workspace\projects\node-process-windows\windows-console-app\windows-console-app\obj\Debug\windows-console-app.pdb
+C:\BitBucket\bryanphe-workspace\projects\node-process-windows\windows-console-app\windows-console-app\bin\Debug\Newtonsoft.Json.dll
+C:\BitBucket\bryanphe-workspace\projects\node-process-windows\windows-console-app\windows-console-app\bin\Debug\Newtonsoft.Json.pdb
+C:\BitBucket\bryanphe-workspace\projects\node-process-windows\windows-console-app\windows-console-app\bin\Debug\Newtonsoft.Json.xml
