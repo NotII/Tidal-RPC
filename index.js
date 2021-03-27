@@ -1,17 +1,17 @@
 const presence = require("discord-rpc");
-var fs = require("fs");
-var SelfReloadJSON = require("self-reload-json");
-var processWindows = require("node-process-windows");
+const fs = require("fs");
+const SelfReloadJSON = require("self-reload-json");
+const processWindows = require("node-process-windows");
 const client = new presence.Client({ transport: "ipc" });
 client.on("ready", () => {
   let data1 = new SelfReloadJSON("./data.json");
   setInterval(() => {
-    var activeProcesses = processWindows.getProcesses(function (
+    const activeProcesses = processWindows.getProcesses(function (
       err,
       processes
     ) {
-      var TIDAL = processes.filter((p) => p.processName.indexOf("TIDAL") >= 0);
-      for (var i of TIDAL) {
+      const TIDAL = processes.filter((p) => p.processName.indexOf("TIDAL") >= 0);
+      for (const i of TIDAL) {
         if (i.mainWindowTitle.length > 0) {
           if (i.mainWindowTitle === "TIDAL") {
             client.request("SET_ACTIVITY", {
