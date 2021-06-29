@@ -6,10 +6,7 @@ const client = new presence.Client({ transport: "ipc" });
 client.on("ready", () => {
   let data1 = new SelfReloadJSON("./data.json");
   setInterval(() => {
-    const activeProcesses = processWindows.getProcesses(function (
-      err,
-      processes
-    ) {
+    processWindows.getProcesses((_err, processes) => {
       const TIDAL = processes.filter((p) => p.processName.indexOf("TIDAL") >= 0);
       for (const i of TIDAL) {
         if (i.mainWindowTitle.length > 0) {
