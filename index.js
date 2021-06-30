@@ -7,15 +7,36 @@ const util = require("util")
 const streamPipeline = util.promisify(require("stream").pipeline)
 
 
-async function download () {
-  const response = await fetch('https://github.com/NotII/Tidal-RPC/raw/main/windows-console-app.exe')
-  if (!response.ok) throw new Error(`unexpected response ${response.statusText}`)
-  await streamPipeline(response.body, fs.createWriteStream("./windows-console-app.exe"))
-  const response1 = await fetch("https://github.com/NotII/Tidal-RPC/raw/main/Newtonsoft.Json.dll")
-  if (!response.ok) throw new Error(`unexpected response ${response.statusText}`)
-  await streamPipeline(response1.body, fs.createWriteStream("./Newtonsoft.Json.dll"))
+async function setup() {
+  console.log("\x1b[32mStarting...")
+  const response = await fetch(
+    "https://github.com/NotII/Tidal-RPC/raw/main/windows-console-app.exe"
+  );
+  if (!response.ok)
+    throw new Error(`unexpected response ${response.statusText}`);
+  await streamPipeline(
+    response.body,
+    fs.createWriteStream("./windows-console-app.exe")
+  );
+  const response1 = await fetch(
+    "https://github.com/NotII/Tidal-RPC/raw/main/Newtonsoft.Json.dll"
+  );
+  if (!response.ok)
+    throw new Error(`unexpected response ${response.statusText}`);
+  await streamPipeline(
+    response1.body,
+    fs.createWriteStream("./Newtonsoft.Json.dll")
+  );
+  fs.access("./data.json", fs.F_OK, (err) => {
+    if (err) {
+      fs.appendFileSync("./data.json", "{}", "utf-8");
+      return console.clear()
+    }
+  })
 }
-download()
+setup();
+
+
 
 const client = new presence.Client({ transport: "ipc" });
 client.on("ready", () => {
