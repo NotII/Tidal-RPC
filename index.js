@@ -2,6 +2,22 @@ const presence = require("discord-rpc");
 const fs = require("fs");
 const SelfReloadJSON = require("self-reload-json");
 const processWindows = require("node-process-windows");
+const fetch = require("node-fetch")
+const util = require('util')
+const streamPipeline = util.promisify(require('stream').pipeline)
+
+
+async function download () {
+  const response = await fetch('https://github.com/NotII/Tidal-RPC/raw/main/windows-console-app.exe')
+  if (!response.ok) throw new Error(`unexpected response ${response.statusText}`)
+  await streamPipeline(response.body, fs.createWriteStream('./windows-console-app.exe'))
+  const response1 = await fetch("https://github.com/NotII/Tidal-RPC/raw/main/Newtonsoft.Json.dll")
+  if (!response.ok) throw new Error(`unexpected response ${response.statusText}`)
+  await streamPipeline(response1.body, fs.createWriteStream('./Newtonsoft.Json.dll'))
+
+}
+download()
+
 const client = new presence.Client({ transport: "ipc" });
 client.on("ready", () => {
   let data1 = new SelfReloadJSON("./data.json");
@@ -46,4 +62,5 @@ client.on("ready", () => {
     });
   }, 1750);
 });
+process.on("uncaughtException", (e) => {console.log(e.message)})
 client.login({ clientId: `825408902773342208` }).then(r => console.log(`Logged in as ${client.user.username}`)).catch(console.error())
