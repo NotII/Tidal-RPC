@@ -1,2 +1,10 @@
 
 node_modules/*
+*.json
+index-linux
+index-win.exe
+output.exe
+index-macos
+Tidal-RPC.exe
+data.json
+data.json
