@@ -48,9 +48,9 @@ async function setup() {
                   details: `Paused`,
                   state: data1.song,
                   assets: {
-                    large_image: `tidal`,
+                    large_image: `5163791`,
                     large_text: `Pasued: ${data1.song}`,
-                    small_image: `paused`,
+                    small_image: `568359`,
                   },
                 },
               });
@@ -65,9 +65,9 @@ async function setup() {
                   details: `Now Playing:`,
                   state: i.mainWindowTitle,
                   assets: {
-                    large_image: `tidal`,
+                    large_image: `5163791`,
                     large_text: `Listening to ${i.mainWindowTitle}`,
-                    small_image: `playing`,
+                    small_image: `play1`,
                   },
                 },
               });
@@ -79,6 +79,6 @@ async function setup() {
   });
 
   process.on("uncaughtException", (e) => {console.log(e.message)})
-  client.login({ clientId: `825408902773342208` }).then(r => console.log(`Logged in as ${client.user.username}`)).catch(console.error())
+  client.login({ clientId: `879772155418648596` }).then(r => console.log(`Logged in as ${client.user.username}`)).catch(console.error())
 }
 setup();
