@@ -49,7 +49,7 @@ async function setup() {
                   state: data1.song,
                   assets: {
                     large_image: `5163791`,
-                    large_text: `Pasued: ${data1.song}`,
+                    large_text: `Paused: ${data1.song}`,
                     small_image: `568359`,
                   },
                 },
