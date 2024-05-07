@@ -30,8 +30,7 @@ def extract_song_info(window_title):
         return None, None
 
 def get_tidal_song_info():
-    all_handles
-    del all_handles[:]
+    all_handles.clear()
     tidal_pids = []
     for proc in psutil.process_iter(['pid', 'name']):
         if 'TIDAL.exe' in proc.info['name']:
@@ -53,8 +52,11 @@ def get_tidal_song_info():
     return None, None
 
 session_file = Path("tidal-session-oauth.json")
+
 session = tidalapi.Session()
 session.login_session_file(session_file)
+
+github_url = "https://github.com/notii/tidal-rpc"
 
 rpc = Presence(1236873477311430716)
 rpc.connect()
@@ -65,21 +67,22 @@ while True:
 
         if song_name and artist:
             track = session.search(f'{artist} - {song_name}', limit=1)
-            album = session.album(track["tracks"][0].album.id)
-            albumArt = album.image(640, 640) if album else "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0TiNtfzWOOKq0-a6sRKgrRYGKdyjC2ICWnalfiLykMQ&s"
-
+            albumArt = session.album(track["tracks"][0].album.id).image(640, 640) if track["tracks"] else "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0TiNtfzWOOKq0-a6sRKgrRYGKdyjC2ICWnalfiLykMQ&s"
             rpc.update(
                 details='Now Listening to:',
                 state=f'{artist} - {song_name}',
                 large_image=albumArt,
                 large_text=f'{artist} - {song_name}',
                 small_image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0TiNtfzWOOKq0-a6sRKgrRYGKdyjC2ICWnalfiLykMQ&s',
+                small_text=github_url
             )
         else:
+            albumArt = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0TiNtfzWOOKq0-a6sRKgrRYGKdyjC2ICWnalfiLykMQ&s"
             rpc.update( 
                 details="Not listening to TIDAL",
-                large_image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0TiNtfzWOOKq0-a6sRKgrRYGKdyjC2ICWnalfiLykMQ&s'
-                )
+                large_image=albumArt,
+                large_text=github_url
+            )
 
         time.sleep(15)
 
