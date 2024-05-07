@@ -9,7 +9,6 @@ from pathlib import Path
 all_handles = []
 
 def enum_windows_proc(hwnd, lParam):
-    all_handles
     all_handles.append(hwnd)
     return True
 
@@ -67,11 +66,12 @@ while True:
         if song_name and artist:
             track = session.search(f'{artist} - {song_name}', limit=1)
             album = session.album(track["tracks"][0].album.id)
-            
+            albumArt = album.image(640, 640) if album else "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0TiNtfzWOOKq0-a6sRKgrRYGKdyjC2ICWnalfiLykMQ&s"
+
             rpc.update(
                 details='Now Listening to:',
                 state=f'{artist} - {song_name}',
-                large_image=album.image(640, 640),
+                large_image=albumArt,
                 large_text=f'{artist} - {song_name}',
                 small_image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0TiNtfzWOOKq0-a6sRKgrRYGKdyjC2ICWnalfiLykMQ&s',
             )
